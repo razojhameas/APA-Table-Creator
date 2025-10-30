@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>APA Table Formatter</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="html2canvas.min.js"></script> 
+    <script src="FileSaver.min.js"></script> 
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3 class="main-title">APA Table Creator</h3>
+            <div class="header-controls">
+                <a href="https://github.com/razojhameas" target="_blank" class="github-link">GitHub Profile</a>
+                <label class="toggle-switch">
+                    Light/Dark Mode
+                    <div class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="customization-section">
+            <h4>Table Customization</h4>
+            
+            <div class="control-grid">
+                <div class="control-group">
+                    <label for="fontFamily">Table Font Family (Locked after process)</label>
+                    <select id="fontFamily">
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Calibri">Calibri</option>
+                        <option value="Tahoma">Tahoma</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="fontSize">Table Font Size (Locked after process)</label>
+                    <select id="fontSize">
+                        <option value="9pt">9pt</option>
+                        <option value="10pt" selected>10pt</option>
+                        <option value="12pt">12pt</option>
+                    </select>
+                </div>
+                <div class="control-group" style="flex-grow: 0;">
+                    <label for="textColor">Table Text Color</label>
+                    <input type="color" id="textColor" value="#000000" style="padding: 0; height: 36px;">
+                </div>
+                <div class="control-group" style="flex-grow: 0;">
+                    <label for="borderColor">Table Border Color</label>
+                    <input type="color" id="borderColor" value="#000000" style="padding: 0; height: 36px;">
+                </div>
+            </div>
+
+            <div class="control-group full-width">
+                <label for="columnAlignment">Column Alignment (e.g., Left, Center, Center, Right)</label>
+                <input type="text" id="columnAlignment" placeholder="Specify alignment for each column, separated by commas.">
+                <p class="note">Options: Left, Center, Right. Must match the number of columns. Default is Left, Center, Center, ...</p>
+            </div>
+            
+            <div class="control-group full-width">
+                <label for="tableCaption">Table Caption (e.g., Table 1. Descriptive Title)</label>
+                <input type="text" id="tableCaption" placeholder="Table 1. Enter your descriptive title here. (The title will be italicized on a new line.)">
+            </div>
+            
+            <div class="control-group full-width">
+                <label for="tableNote">Table Note (Optional)</label>
+                <textarea id="tableNote" placeholder="Note. Add statistical details, abbreviations, etc."></textarea>
+            </div>
+        </div>
+        
+        <div class="upload-group">
+            <h4>1. Input Data</h4>
+            
+            <div class="control-group full-width input-mode">
+                <label>Data Input Mode</label>
+                <div class="radio-buttons">
+                    <input type="radio" id="modeFile" name="inputMode" value="file" checked>
+                    <label for="modeFile">File Upload (CSV/TSV)</label>
+                    <input type="radio" id="modeRaw" name="inputMode" value="raw">
+                    <label for="modeRaw">Raw Text Paste</label>
+                </div>
+            </div>
+
+            <div id="fileMode" class="input-area">
+                <label for="dataFile">Select File (.csv or .tsv)</label>
+                <input type="file" id="dataFile" accept=".csv, .tsv">
+            </div>
+
+            <div id="rawMode" class="input-area" style="display: none;">
+                <label for="rawData">Paste Raw Data (e.g., Tab-separated or Comma-separated)</label>
+                <textarea id="rawData" placeholder="Paste your data here..."></textarea>
+                <button id="processRaw" class="process-btn">Process Data</button>
+            </div>
+        </div>
+
+        <div id="exportButtons" class="export-group" style="display: none;">
+            <h4>2. Export Options</h4>
+            <div class="button-row">
+                <button id="exportWord" class="export-btn word-btn">Export to Word (.doc)</button>
+                <button id="exportPng" class="export-btn png-btn">Download PNG</button>
+                <button id="copyPng" class="export-btn copy-btn">Copy PNG (Pasteable)</button>
+            </div>
+        </div>
+
+        <div id="tableContainer">
+            <p>Select an input mode and provide data to generate your APA-formatted table.</p>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
